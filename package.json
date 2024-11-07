@@ -9,7 +9,7 @@
     "scripts": {
         "build": "npm run build -ws",
         "test": "jest --config jest.config.js --detectOpenHandles",
-        "publish": "lerna exec --concurrency 1 -- stream semantic-release"
+        "publish": "lerna exec --concurrency 1 -- semantic-release"
     },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",

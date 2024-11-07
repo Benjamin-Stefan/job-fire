@@ -1,6 +1,6 @@
 module.exports = {
     branches: ["main"],
-    repositoryUrl: "https://github.com/Benjamin-Stefan/ant-plus-next",
+    repositoryUrl: "https://github.com/Benjamin-Stefan/job-fire",
     plugins: [
         [
             "@semantic-release/commit-analyzer",
@@ -65,12 +65,7 @@ Released on: {{date}}
             },
         ],
         "@semantic-release/changelog",
-        [
-            "@semantic-release/npm",
-            {
-                pkgRoot: "dist",
-            },
-        ],
+        "@semantic-release/npm",
         [
             "@semantic-release/git",
             {
