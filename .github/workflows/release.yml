@@ -1,0 +1,36 @@
+name: Release
+
+on:
+    workflow_run:
+        workflows: ["CI"]
+        types:
+            - completed
+
+jobs:
+    release:
+        if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build packages
+              run: npm run build
+
+            - name: Generate and Publish Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: |
+                  npx lerna version --conventional-commits --create-release github --yes
+                  npx lerna publish from-package --yes --npm-client npm
