@@ -22,7 +22,7 @@
     },
     "license": "MIT",
     "peerDependencies": {
-        "job-fire": "^1.1.0"
+        "job-fire": "^1.0.0"
     },
     "dependencies": {
         "mongodb": "^6.10.0"
