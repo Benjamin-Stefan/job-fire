@@ -23,7 +23,7 @@
     },
     "license": "MIT",
     "peerDependencies": {
-        "job-fire": "^1.0.0"
+        "job-fire": "^1.1.0"
     },
     "dependencies": {
         "ioredis": "^5.4.1"
