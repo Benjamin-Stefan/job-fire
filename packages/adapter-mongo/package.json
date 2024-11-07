@@ -21,10 +21,8 @@
         "email": "contact@benjamin-stefan.eu"
     },
     "license": "MIT",
-    "peerDependencies": {
-        "job-fire": "^1.1.0"
-    },
     "dependencies": {
+        "job-fire": "^1.1.0",
         "mongodb": "^6.10.0"
     },
     "devDependencies": {
