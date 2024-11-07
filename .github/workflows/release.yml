@@ -31,6 +31,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: |
-                  npx lerna version --conventional-commits --create-release github --yes
-                  npx lerna publish from-package --yes --npm-client npm
+              run: npm run publish
