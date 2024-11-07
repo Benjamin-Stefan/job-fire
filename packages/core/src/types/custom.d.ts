@@ -33,13 +33,13 @@ export interface IJobStore {
      * @param {number} duration - Duration of the job execution in milliseconds.
      * @returns {void} No return value.
      */
-    saveJobResult(jobId: string, result: JobResult, duration: number): void;
+    saveJobResult(jobId: string, result: JobResult, duration: number): Promise<void>;
     /**
      * Retrieves the execution history and statistics of a specified job.
      * @param {string} jobId - Unique identifier of the job.
      * @returns {JobExecutionStats | undefined} The job execution statistics, or `undefined` if no history exists.
      */
-    getJobHistory(jobId: string): JobExecutionStats | undefined;
+    getJobHistory(jobId: string): Promise<JobExecutionStats | undefined>;
 }
 
 /**

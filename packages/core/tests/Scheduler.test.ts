@@ -94,8 +94,8 @@ describe("Scheduler", () => {
         expect(mockStore.getJobHistory("job7")).toBeDefined();
     });
 
-    test("should retrieve undefinded job history", () => {
-        const jobHistory = scheduler.getJobHistory("job23423423423427");
+    test("should retrieve undefinded job history", async () => {
+        const jobHistory = await scheduler.getJobHistory("job23423423423427");
         expect(jobHistory).toBeUndefined();
     });
 });

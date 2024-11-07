@@ -222,7 +222,9 @@ class Scheduler {
      * @returns {JobExecutionStats|undefined} The job's execution history, or undefined if no history is available.
      */
     getJobHistory(jobId) {
-        return this.store.getJobHistory(jobId);
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.store.getJobHistory(jobId);
+        });
     }
 }
 exports.Scheduler = Scheduler;

@@ -214,7 +214,7 @@ export class Scheduler {
      * @param {string} jobId - The unique identifier of the job whose history is requested.
      * @returns {JobExecutionStats|undefined} The job's execution history, or undefined if no history is available.
      */
-    getJobHistory(jobId: string): JobExecutionStats | undefined {
-        return this.store.getJobHistory(jobId);
+    async getJobHistory(jobId: string): Promise<JobExecutionStats | undefined> {
+        return await this.store.getJobHistory(jobId);
     }
 }

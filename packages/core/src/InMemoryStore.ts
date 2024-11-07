@@ -13,7 +13,7 @@ export class InMemoryStore implements IJobStore {
      * @param {number} duration - Duration of the job execution in milliseconds.
      * @returns {void} No return value.
      */
-    saveJobResult(jobId: string, result: JobResult, duration: number): void {
+    async saveJobResult(jobId: string, result: JobResult, duration: number): Promise<void> {
         const jobStat = this.jobStats.get(jobId) || {
             jobId,
             successCount: 0,
@@ -43,6 +43,7 @@ export class InMemoryStore implements IJobStore {
         }
 
         this.jobStats.set(jobId, jobStat);
+        return Promise.resolve();
     }
 
     /**
@@ -50,7 +51,7 @@ export class InMemoryStore implements IJobStore {
      * @param {string} jobId - Unique identifier of the job to retrieve history for.
      * @returns {JobExecutionStats | undefined} The statistics and execution history of the job, or `undefined` if no history exists.
      */
-    getJobHistory(jobId: string): JobExecutionStats | undefined {
-        return this.jobStats.get(jobId);
+    getJobHistory(jobId: string): Promise<JobExecutionStats | undefined> {
+        return Promise.resolve(this.jobStats.get(jobId));
     }
 }
