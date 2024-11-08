@@ -23,8 +23,8 @@
     },
     "license": "MIT",
     "dependencies": {
-        "ioredis": "^5.4.1",
-        "job-fire": "^1.2.0"
+        "job-fire": "^0.0.0",
+        "ioredis": "^5.4.1"
     },
     "devDependencies": {
         "@types/ioredis": "^4.28.10",
