@@ -1,4 +1,5 @@
-import { ILogger, JobContext, JobExecutionStats, ScheduleOptions, JobOptions } from "./types/custom";
+import { JobContext, JobExecutionStats, ScheduleOptions, JobOptions } from "./types";
+import { ILogger } from "./interfaces/ILogger";
 /**
  * Scheduler for managing and executing jobs with concurrency control and optional database storage.
  * Provides functionality to add, remove, and manage scheduled and interval-based jobs.

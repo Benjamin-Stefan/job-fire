@@ -1,5 +1,5 @@
 import { InMemoryStore } from "../src/InMemoryStore";
-import { JobResult } from "../src/types/custom";
+import { JobResult } from "../src/types";
 
 describe("InMemoryStore", () => {
     let store: InMemoryStore;

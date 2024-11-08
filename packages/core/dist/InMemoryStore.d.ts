@@ -1,4 +1,5 @@
-import { JobExecutionStats, IJobStore, JobResult } from "./types/custom";
+import { IJobStore } from "./interfaces/IJobStore";
+import { JobExecutionStats, JobResult } from "./types";
 /**
  * In-memory implementation of the IJobStore interface for storing and retrieving job execution statistics.
  */

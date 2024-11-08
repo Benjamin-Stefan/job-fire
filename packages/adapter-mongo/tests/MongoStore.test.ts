@@ -1,6 +1,6 @@
 import { MongoClient, Db, Collection, Document, InsertOneResult, UpdateResult, ObjectId } from "mongodb";
 import { MongoStore } from "../src/MongoStore";
-import { IJobStore, JobExecutionStats, JobResult } from "job-fire/src/types/custom";
+import { JobExecutionStats, JobResult } from "job-fire/src/types";
 
 jest.mock("mongodb", () => {
     const originalModule = jest.requireActual("mongodb");

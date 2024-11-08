@@ -1,17 +1,18 @@
-import Redis from "ioredis";
-import { IJobStore, JobExecutionStats, JobResult } from "job-fire/src/types/custom";
+import Redis, { RedisOptions } from "ioredis";
+import { IJobStore } from "job-fire/src/interfaces/IJobStore";
+import { JobExecutionStats, JobResult } from "job-fire/src/types";
 
 export class RedisStore implements IJobStore {
     private redisClient: Redis;
 
     /**
-     * Constructor that optionally accepts a connection string to establish a connection to Redis.
-     * @param {string} [connectionString] - Optional connection string for Redis.
+     * Constructor that optionally accepts a RedisOptions to establish a connection to Redis.
+     * @param {RedisOptions} [redisOptions] - Optional redisOptions for Redis.
      * If not provided, a default Redis instance is created.
      */
-    constructor(connectionString?: string) {
-        if (connectionString) {
-            this.redisClient = new Redis(connectionString);
+    constructor(redisOptions?: RedisOptions) {
+        if (redisOptions) {
+            this.redisClient = new Redis(redisOptions);
         } else {
             this.redisClient = new Redis();
         }

@@ -1,5 +1,5 @@
 import { Job } from "../src/Job";
-import { JobContext, JobOptions } from "../src/types/custom";
+import { JobContext, JobOptions } from "../src/types";
 
 describe("Job", () => {
     let jobFunction: jest.Mock;

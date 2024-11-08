@@ -41,6 +41,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: |
-                  npx lerna version --conventional-commits --yes
-                  npx lerna publish from-package --yes
+              run: npx lerna publish from-package --yes

@@ -1,4 +1,5 @@
-import { IJobStore, JobExecutionStats, JobResult } from "job-fire/src/types/custom";
+import { JobExecutionStats, JobResult } from "job-fire/src/types";
+import { IJobStore } from "job-fire/src/interfaces/IJobStore";
 export declare class MongoStore implements IJobStore {
     private client;
     private db;

@@ -1,4 +1,4 @@
-import { ILogger } from "./types/custom";
+import { ILogger } from "./interfaces/ILogger";
 
 /**
  * Logger class implementing the ILogger interface for standardized logging at different levels.

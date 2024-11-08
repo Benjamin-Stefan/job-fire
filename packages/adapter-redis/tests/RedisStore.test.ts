@@ -1,6 +1,6 @@
-import Redis from "ioredis";
+import Redis, { RedisOptions } from "ioredis";
 import { RedisStore } from "../src/RedisStore";
-import { IJobStore, JobExecutionStats, JobResult } from "job-fire/src/types/custom";
+import { JobResult } from "job-fire/src/types";
 
 jest.mock("ioredis");
 
@@ -20,7 +20,7 @@ describe("RedisStore", () => {
 
     describe("constructor", () => {
         it("should create a Redis client with the provided connection string", () => {
-            const connectionString = "redis://localhost:6379";
+            const connectionString: RedisOptions = { host: "redis://localhost", port: 6379 };
             redisStore = new RedisStore(connectionString);
             expect(Redis).toHaveBeenCalledWith(connectionString);
         });

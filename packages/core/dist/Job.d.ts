@@ -1,4 +1,4 @@
-import { JobContext, JobOptions, JobResult } from "./types/custom";
+import { JobContext, JobOptions, JobResult } from "./types";
 /**
  * Represents a job that can be scheduled and executed with retry and concurrency options.
  * Provides functionality for setting retries, timeouts, and concurrency handling.

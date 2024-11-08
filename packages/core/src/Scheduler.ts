@@ -1,7 +1,9 @@
 import { Job } from "./Job";
 import { Logger } from "./Logger";
 import { InMemoryStore } from "./InMemoryStore";
-import { ILogger, JobContext, IJobStore, JobExecutionStats, ScheduleOptions, JobOptions } from "./types/custom";
+import { JobContext, JobExecutionStats, ScheduleOptions, JobOptions } from "./types";
+import { IJobStore } from "./interfaces/IJobStore";
+import { ILogger } from "./interfaces/ILogger";
 
 /**
  * Scheduler for managing and executing jobs with concurrency control and optional database storage.

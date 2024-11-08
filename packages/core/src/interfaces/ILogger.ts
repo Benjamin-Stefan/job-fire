@@ -1,11 +1,10 @@
-import { ILogger } from "./interfaces/ILogger";
 /**
- * Logger class implementing the ILogger interface for standardized logging at different levels.
+ * Interface for logging messages at various levels.
  */
-export declare class Logger implements ILogger {
+export interface ILogger {
     /**
-     * Logs an informational message.
-     * @param {string} message - The information to log.
+     * Logs an debug message.
+     * @param {string} message - The debug to log.
      * @returns {void} No return value.
      */
     debug(message: string): void;

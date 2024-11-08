@@ -1,47 +1,5 @@
-/**
- * Interface for logging messages at various levels.
- */
-export interface ILogger {
-    /**
-     * Logs an debug message.
-     * @param {string} message - The debug to log.
-     * @returns {void} No return value.
-     */
-    debug(message: string): void;
-    /**
-     * Logs a warning message.
-     * @param {string} message - The warning to log.
-     * @returns {void} No return value.
-     */
-    warn(message: string): void;
-    /**
-     * Logs an error message.
-     * @param {string} message - The error to log.
-     * @returns {void} No return value.
-     */
-    error(message: string): void;
-}
-
-/**
- * Interface for storing and retrieving job execution results and statistics.
- */
-export interface IJobStore {
-    /**
-     * Saves the result of a job execution, including its duration.
-     * @param {string} jobId - Unique identifier of the job.
-     * @param {JobResult} result - The result of the job execution, including success status and error if any.
-     * @param {number} duration - Duration of the job execution in milliseconds.
-     * @returns {void} No return value.
-     */
-    saveJobResult(jobId: string, result: JobResult, duration: number): Promise<void>;
-    /**
-     * Retrieves the execution history and statistics of a specified job.
-     * @param {string} jobId - Unique identifier of the job.
-     * @returns {JobExecutionStats | undefined} The job execution statistics, or `undefined` if no history exists.
-     */
-    getJobHistory(jobId: string): Promise<JobExecutionStats | undefined>;
-}
-
+import { IJobStore } from "../interfaces/IJobStore";
+import { ILogger } from "../interfaces/ILogger";
 /**
  * Context object provided to a job during execution, including the job's ID and an optional logger.
  * @typedef {object} JobContext
@@ -54,7 +12,6 @@ export type JobContext = {
     logger?: ILogger | null;
     [key: string]: any;
 };
-
 /**
  * Represents the execution statistics of a job, including success and failure counts, total duration, and individual executions.
  * @typedef {object} JobExecutionStats
@@ -79,7 +36,6 @@ export type JobExecutionStats = {
         result: JobResult;
     }>;
 };
-
 /**
  * Configuration options for scheduling a job, including timing, retry behavior, and concurrency settings.
  * @typedef {object} JobOptions
@@ -100,7 +56,6 @@ export type JobOptions = {
     allowConcurrent?: boolean;
     timeout?: number;
 };
-
 /**
  * Represents the result of a job execution.
  * @typedef {object} JobResult
@@ -113,7 +68,6 @@ export type JobResult = {
     result?: unknown;
     error?: Error;
 };
-
 /**
  * Configuration options for setting up the scheduler, including storage options and concurrency limits.
  * @typedef {object} ScheduleOptions

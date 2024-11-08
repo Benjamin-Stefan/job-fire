@@ -16,13 +16,13 @@ exports.RedisStore = void 0;
 const ioredis_1 = __importDefault(require("ioredis"));
 class RedisStore {
     /**
-     * Constructor that optionally accepts a connection string to establish a connection to Redis.
-     * @param {string} [connectionString] - Optional connection string for Redis.
+     * Constructor that optionally accepts a RedisOptions to establish a connection to Redis.
+     * @param {RedisOptions} [redisOptions] - Optional redisOptions for Redis.
      * If not provided, a default Redis instance is created.
      */
-    constructor(connectionString) {
-        if (connectionString) {
-            this.redisClient = new ioredis_1.default(connectionString);
+    constructor(redisOptions) {
+        if (redisOptions) {
+            this.redisClient = new ioredis_1.default(redisOptions);
         }
         else {
             this.redisClient = new ioredis_1.default();

@@ -1,7 +1,7 @@
 import { Scheduler } from "../src/Scheduler";
 import { Logger } from "../src/Logger";
 import { InMemoryStore } from "../src/InMemoryStore";
-import { JobOptions } from "../src/types/custom";
+import { JobOptions } from "../src/types";
 
 describe("Scheduler", () => {
     let scheduler: Scheduler;
