@@ -4,35 +4,46 @@ const SchedulerInstance = new Scheduler({ debug: true });
 
 SchedulerInstance.addJob(
     "simpleJob1",
-    async () => {
+    async (context) => {
         console.log("my simple job 1 start");
+        await new Promise((resolve) =>
+            setTimeout(() => {
+                if (context.abortController.signal.aborted) {
+                    console.log("Aborted simpleJob1");
+                    return resolve();
+                }
+                console.log("my simple job 1 end");
+                resolve();
+            }, 3000)
+        );
     },
-    { interval: 1000 }
+    { interval: 1000, timeout: 500 }
 );
 
 SchedulerInstance.addJob(
     "simpleJob2",
     async (context) => {
-        console.log(`my ${context.jobId} start`);
-    },
-    { interval: 2000 }
-);
+        console.log("my simple job 2 start");
 
-SchedulerInstance.addJob(
-    "simpleJob3",
-    async (context, params) => {
-        console.log(`my ${context.jobId} start with params: ${JSON.stringify(params)}`);
-        if (params.remove) {
-            SchedulerInstance.removeJob(context.jobId);
+        for (let i = 0; i < 1000; i++) {
+            // Prüfen, ob das Signal zum Abbrechen gesendet wurde
+            if (context.abortController.signal.aborted) {
+                console.log("Aborted simpleJob2");
+                break; // Bricht die Schleife ab
+            }
+
+            // Andernfalls die Aufgabe fortsetzen
+            await new Promise((resolve) => setTimeout(resolve, 100));
+
+            console.log("Iteration:", i, "my simple job 2 end");
         }
     },
-    { interval: 3000, params: { test: "test", remove: true } }
+    { interval: 1000, timeout: 500 }
 );
 
 setTimeout(async () => {
     printStats(await SchedulerInstance.getJobHistory("simpleJob1"));
     printStats(await SchedulerInstance.getJobHistory("simpleJob2"));
-    printStats(await SchedulerInstance.getJobHistory("simpleJob3"));
 
     SchedulerInstance.removeJob("simpleJob1");
     SchedulerInstance.removeJob("simpleJob2");
@@ -42,6 +53,7 @@ setTimeout(async () => {
 }, 5000);
 
 function printStats(stats) {
+    console.log("Stats:", stats);
     const outPut = {
         jobId: stats.jobId,
         successCount: stats.successCount,

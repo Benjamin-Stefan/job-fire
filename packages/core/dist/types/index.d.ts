@@ -1,27 +1,32 @@
 import { IJobStore } from "../interfaces/IJobStore";
 import { ILogger } from "../interfaces/ILogger";
 /**
- * Context object provided to a job during execution, including the job's ID and an optional logger.
+ * Context object provided to a job during execution, containing information such as job ID and an optional logger.
+ * This context may also hold additional properties as custom context data.
+ *
  * @typedef {object} JobContext
  * @property {string} jobId - Unique identifier of the job.
- * @property {ILogger | null} [logger] - Optional logger for logging within the job context.
+ * @property {AbortController} abortController - Controller used to manage and signal abort requests.
+ * @property {ILogger | null} [logger] - Optional logger instance for logging within the job context.
  * @property {any} [key: string] - Additional properties for custom context data.
  */
 export type JobContext = {
     jobId: string;
+    abortController: AbortController;
     logger?: ILogger | null;
     [key: string]: any;
 };
 /**
- * Represents the execution statistics of a job, including success and failure counts, total duration, and individual executions.
+ * Execution statistics of a job, detailing the number of successes, failures, total duration, and individual executions.
+ *
  * @typedef {object} JobExecutionStats
  * @property {string} jobId - Unique identifier of the job.
- * @property {number} successCount - Number of successful executions of the job.
- * @property {number} failureCount - Number of failed executions of the job.
- * @property {number} timeoutCount - Number of times the job timed out.
- * @property {number} retryFailures - Number of retry attempts that failed.
- * @property {number} totalDuration - Cumulative duration of all executions in milliseconds.
- * @property {Array<{timestamp: Date, duration: number, result: JobResult}>} executions - Array of individual execution records, each with a timestamp, duration, and result.
+ * @property {number} successCount - Number of successful job executions.
+ * @property {number} failureCount - Number of job executions that failed.
+ * @property {number} timeoutCount - Number of job executions that timed out.
+ * @property {number} retryFailures - Number of failed retry attempts.
+ * @property {number} totalDuration - Total duration of all job executions in milliseconds.
+ * @property {Array<{timestamp: Date, duration: number, result: JobResult}>} executions - Array of execution records, each containing a timestamp, duration, and result.
  */
 export type JobExecutionStats = {
     jobId: string;
@@ -37,15 +42,16 @@ export type JobExecutionStats = {
     }>;
 };
 /**
- * Configuration options for scheduling a job, including timing, retry behavior, and concurrency settings.
+ * Options for configuring a job's schedule, including timing, retries, and concurrency settings.
+ *
  * @typedef {object} JobOptions
- * @property {number | null} interval - Interval in milliseconds for repeating the job (null if not interval-based).
+ * @property {number | null} interval - Interval in milliseconds for repeated job execution, or null if not repeating.
  * @property {string} [cron] - Cron expression defining the job's schedule.
- * @property {number} [retries] - Number of retry attempts allowed for the job.
- * @property {any} [params] - Parameters to be passed to the job function.
- * @property {boolean} [repeat] - Whether the job should repeat after completion.
- * @property {boolean} [allowConcurrent] - If true, allows concurrent job execution.
- * @property {number} [timeout] - Timeout duration for the job in milliseconds.
+ * @property {number} [retries] - Number of retries allowed in case of job failure.
+ * @property {any} [params] - Parameters to pass to the job function.
+ * @property {boolean} [repeat] - Determines whether the job should repeat after completion.
+ * @property {boolean} [allowConcurrent] - Allows the job to execute concurrently if set to true.
+ * @property {number} [timeout] - Duration in milliseconds before the job times out.
  */
 export type JobOptions = {
     interval: number | null;
@@ -57,24 +63,37 @@ export type JobOptions = {
     timeout?: number;
 };
 /**
- * Represents the result of a job execution.
+ * Represents the result of a job execution, indicating whether the job was successful and providing the result or error if available.
+ *
  * @typedef {object} JobResult
- * @property {boolean} success - Indicates if the job execution was successful.
- * @property {unknown} [result] - The result of the job execution, if successful.
- * @property {Error} [error] - The error encountered during execution, if any.
+ * @property {boolean} success - Flag indicating if the job executed successfully.
+ * @property {unknown} [result] - Result of the job execution if successful.
+ * @property {Error | SerializedError} [error] - Error encountered during job execution, if any.
  */
 export type JobResult = {
     success: boolean;
     result?: unknown;
-    error?: Error;
+    error?: Error | SerializedError;
 };
 /**
- * Configuration options for setting up the scheduler, including storage options and concurrency limits.
+ * Serialized error structure used to represent error messages and stack traces for job results.
+ *
+ * @typedef {object} SerializedError
+ * @property {string} message - Error message.
+ * @property {string} [stack] - Stack trace of the error, if available.
+ */
+export type SerializedError = {
+    message: string;
+    stack?: string;
+};
+/**
+ * Options for configuring the scheduler's setup, including storage preferences and concurrency limits.
+ *
  * @typedef {object} ScheduleOptions
- * @property {boolean} [useDatabase] - Specifies whether to use a database for job storage.
- * @property {IJobStore} [adapter] - Custom storage adapter implementing `IJobStore`.
- * @property {number} [maxConcurrentJobs] - Maximum number of jobs allowed to run concurrently.
- * @property {boolean} [debug] - Enables debug mode for additional logging.
+ * @property {boolean} [useDatabase] - Indicates if a database should be used for job storage.
+ * @property {IJobStore} [adapter] - Custom storage adapter implementing the `IJobStore` interface.
+ * @property {number} [maxConcurrentJobs] - Maximum number of jobs that can run concurrently.
+ * @property {boolean} [debug] - Enables debug mode for additional logging during scheduling.
  */
 export type ScheduleOptions = {
     useDatabase?: boolean;

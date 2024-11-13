@@ -12,8 +12,8 @@ SchedulerInstance.addJob(
     { interval: 1000 }
 );
 
-setTimeout(() => {
-    printStats(SchedulerInstance.getJobHistory("simpleJob1"));
+setTimeout(async () => {
+    printStats(await SchedulerInstance.getJobHistory("simpleJob1"));
 
     SchedulerInstance.removeJob("simpleJob1");
 

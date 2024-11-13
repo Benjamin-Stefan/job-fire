@@ -10,8 +10,8 @@ SchedulerInstance.addJob(
     { cron: "*/2 * * * * *" }
 );
 
-setTimeout(() => {
-    printStats(SchedulerInstance.getJobHistory("simpleJob1"));
+setTimeout(async () => {
+    printStats(await SchedulerInstance.getJobHistory("simpleJob1"));
 
     SchedulerInstance.removeJob("simpleJob1");
 

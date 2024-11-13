@@ -1,15 +1,15 @@
 const { Scheduler } = require("../dist/Scheduler");
 
-const SchedulerInstance = new Scheduler();
+const SchedulerInstance = new Scheduler({ debug: true });
 
-// SchedulerInstance.addJob(
-//     "simpleRetryErrorJob",
-//     async () => {
-//         console.log("error");
-//         throw new Error("my simple retry error job start");
-//     },
-//     { interval: 5000, retries: 3 }
-// );
+SchedulerInstance.addJob(
+    "simpleRetryErrorJob",
+    async () => {
+        console.log("error");
+        throw new Error("my simple retry error job start");
+    },
+    { interval: 5000, retries: 3 }
+);
 function sleep(time) {
     return new Promise((resolve) => {
         setTimeout(resolve, time || 1000);
