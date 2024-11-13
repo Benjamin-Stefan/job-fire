@@ -7,6 +7,7 @@ exports.Logger = void 0;
 class Logger {
     /**
      * Logs an informational message.
+     *
      * @param {string} message - The information to log.
      * @returns {void} No return value.
      */
@@ -15,6 +16,7 @@ class Logger {
     }
     /**
      * Logs a warning message.
+     *
      * @param {string} message - The warning to log.
      * @returns {void} No return value.
      */
@@ -23,6 +25,7 @@ class Logger {
     }
     /**
      * Logs an error message.
+     *
      * @param {string} message - The error to log.
      * @returns {void} No return value.
      */

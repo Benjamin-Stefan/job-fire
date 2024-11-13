@@ -39,6 +39,7 @@ scheduler.addJob(
 ## 🧪 Examples
 
 Explore more examples in the [examples](./examples) folder.
+For a deeper look, check out the [tests](./tests) folder.
 
 ## 📖 Documentation
 

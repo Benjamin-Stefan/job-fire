@@ -6,6 +6,7 @@ import { ILogger } from "./interfaces/ILogger";
 export class Logger implements ILogger {
     /**
      * Logs an informational message.
+     *
      * @param {string} message - The information to log.
      * @returns {void} No return value.
      */
@@ -15,6 +16,7 @@ export class Logger implements ILogger {
 
     /**
      * Logs a warning message.
+     *
      * @param {string} message - The warning to log.
      * @returns {void} No return value.
      */
@@ -24,6 +26,7 @@ export class Logger implements ILogger {
 
     /**
      * Logs an error message.
+     *
      * @param {string} message - The error to log.
      * @returns {void} No return value.
      */

@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.shouldRunCron = shouldRunCron;
 const cron_parser_1 = __importDefault(require("cron-parser"));
 /**
- * Determines if a job should run at a given date and time based on a cron pattern.
- * @param {string} cronExpression - The cron expression representing the schedule, in the format "minute hour day month weekday".
- * @param {Date} date - The current date and time to check against the cron pattern.
- * @returns {boolean} `true` if the cron pattern matches the current date and time, `false` otherwise.
+ * Determines if a job should execute at a specified date and time based on a cron expression.
+ * Parses the cron expression and checks if the specified date matches the scheduled time.
+ *
+ * @param {string} cronExpression - The cron expression defining the schedule, in the format "minute hour day month weekday".
+ * @param {Date} date - The date and time to check against the cron schedule.
+ * @returns {boolean} Returns `true` if the cron pattern matches the specified date and time, otherwise `false`.
  */
 function shouldRunCron(cronExpression, date) {
     try {
