@@ -18,21 +18,21 @@ describe("RedisStore", () => {
         jest.clearAllMocks();
     });
 
-    describe("constructor", () => {
-        it("should create a Redis client with the provided connection string", () => {
+    describe("RedisStore Initialization Tests", () => {
+        test("should create a Redis client with the provided connection string", () => {
             const connectionString: RedisOptions = { host: "redis://localhost", port: 6379 };
             redisStore = new RedisStore(connectionString);
             expect(Redis).toHaveBeenCalledWith(connectionString);
         });
 
-        it("should create a Redis client with the default configuration if no connection string is provided", () => {
+        test("should create a Redis client with the default configuration if no connection string is provided", () => {
             redisStore = new RedisStore();
             expect(Redis).toHaveBeenCalledWith();
         });
     });
 
-    describe("saveJobResult", () => {
-        it("should save job result and update job statistics", async () => {
+    describe("Job Result Saving Tests", () => {
+        test("should save job result and update job statistics", async () => {
             const jobId = "job1";
             const result: JobResult = { success: true };
             const duration = 1000;
@@ -48,7 +48,6 @@ describe("RedisStore", () => {
             await redisStore.saveJobResult(jobId, result, duration);
 
             expect(redisClient.rpush).toHaveBeenCalledWith(`job:${jobId}:stats:executions`, expect.any(String));
-
             expect(redisClient.hmset).toHaveBeenCalledWith(`job:${jobId}:stats`, {
                 successCount: "2",
                 failureCount: "0",
@@ -57,10 +56,35 @@ describe("RedisStore", () => {
                 totalDuration: "2000",
             });
         });
+
+        test("should handle job result with failure and update job statistics", async () => {
+            const jobId = "job2";
+            const result: JobResult = { success: false, error: { message: "Some error" } };
+            const duration = 500;
+
+            redisClient.hgetall.mockResolvedValue({
+                successCount: "0",
+                failureCount: "1",
+                timeoutCount: "0",
+                retryFailures: "0",
+                totalDuration: "500",
+            });
+
+            await redisStore.saveJobResult(jobId, result, duration);
+
+            expect(redisClient.rpush).toHaveBeenCalledWith(`job:${jobId}:stats:executions`, expect.any(String));
+            expect(redisClient.hmset).toHaveBeenCalledWith(`job:${jobId}:stats`, {
+                successCount: "0",
+                failureCount: "2",
+                timeoutCount: "0",
+                retryFailures: "1",
+                totalDuration: "1000",
+            });
+        });
     });
 
-    describe("getJobHistory", () => {
-        it("should return job history and statistics if they exist", async () => {
+    describe("Job History Retrieval Tests", () => {
+        test("should return job history and statistics if they exist", async () => {
             const jobId = "job1";
 
             redisClient.hgetall.mockResolvedValue({
@@ -98,7 +122,7 @@ describe("RedisStore", () => {
             });
         });
 
-        it("should return undefined if no job history exists", async () => {
+        test("should return undefined if no job history exists", async () => {
             const jobId = "job1";
 
             redisClient.hgetall.mockResolvedValue({});
