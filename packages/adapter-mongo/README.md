@@ -1,6 +1,6 @@
 # Job-Fire Mongo
 
-A MongoDB adapter for the [Job-Fire](https://github.com/benjamin-stefan/job-fire) scheduler, enabling job execution history and statistics storage in Redis.
+A MongoDB adapter for the [Job-Fire](https://github.com/benjamin-stefan/job-fire) scheduler, enabling the storage of job execution history and statistics in MongoDB.
 
 ## Installation
 

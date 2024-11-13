@@ -1,8 +1,8 @@
 # Job-Fire Monorepo
 
-**Job-Fire** is a monorepo that offers a flexible job scheduling system with support for different database adapters. The core library provides general scheduling functionalities, while specific adapters for databases like Redis and MongoDB are available as separate packages, allowing users to choose only the database dependencies they need.
+**Job-Fire** is a monorepo that provides a flexible job scheduling system with support for various database adapters. The core library offers general scheduling functionality, while specific adapters for databases like Redis and MongoDB are available as separate packages. This modular design lets users select only the database dependencies they need.
 
-## Übersicht
+## Overview
 
 -   **Core Package** (`job-fire`): Provides the foundational scheduling functions of the Job-Fire system.
 -   **Redis Adapter** (`job-fire.redis`): Adds Redis support for `job-fire`.
@@ -49,7 +49,7 @@ Explore more examples in the [examples](./packages/core/examples) folder.
 
 ### Core Package (`job-fire`)
 
-The core package offers the basic functionality of the Job-Fire system.
+The core package provides the essential functionality of the Job-Fire system.
 
 **Features**
 

@@ -5,11 +5,11 @@ A powerful scheduler for Node.js applications, designed to manage and execute jo
 ## Features
 
 -   **Concurrency Control**: Limit the number of concurrent job executions.
--   **Cron and Interval Scheduling**: Support for scheduling jobs based on cron expressions or fixed intervals.
--   **In-Memory Storage**: Stores job statistics and results.
--   **Extensible Logging**: Integrate a custom logger.
+-   **Cron and Interval Scheduling**: Schedule jobs using cron expressions or fixed intervals.
+-   **In-Memory Storage**: Store job statistics and results.
+-   **Extensible Logging**: Integrate a custom logger for more control over logging.
 -   **Retry Mechanism**: Automatically retry failed jobs.
--   **Timeout Support**: Configure a timeout for each job execution.
+-   **Timeout Support**: Set a timeout for each job execution.
 
 ## Installation
 
@@ -54,7 +54,7 @@ Creates a new instance of the Scheduler.
 
 `addJob(id: string, jobFunction: (params: any, context: JobContext) => Promise<any>, options: JobOptions)`
 
-Adds a new job, either with a cron-based or interval-based schedule.
+Adds a new job, with either a cron-based or interval-based schedule.
 
 -   `id`: Unique identifier for the job.
 -   `jobFunction`: The function to execute for the job.

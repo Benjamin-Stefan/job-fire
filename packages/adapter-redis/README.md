@@ -1,6 +1,6 @@
 # Job-Fire Redis
 
-A Redis adapter for the [Job-Fire](https://github.com/benjamin-stefan/job-fire) scheduler, enabling job execution history and statistics storage in Redis.
+A Redis adapter for the [Job-Fire](https://github.com/benjamin-stefan/job-fire) scheduler, enabling storage of job execution history and statistics.
 
 ## Installation
 
@@ -62,7 +62,7 @@ constructor(redisOptions?: RedisOptions);
 ```
 
 -   `redisOptions` (optional): Configuration options for the Redis client as defined by the `RedisOptions` type from `ioredis`.
--   If no options are provided, the constructor will attempt to connect to Redis using the default configuration.
+-   If no options are provided, the constructor attempts to connect to Redis using the default configuration.
 
 ## 🤝 Contributing
 
