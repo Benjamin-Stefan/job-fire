@@ -30,8 +30,9 @@ Here’s a quick example of how to use the core package together with the Redis 
 ```typescript
 import { Scheduler } from "job-fire";
 import { RedisAdapter } from "job-fire.redis";
+const store = new RedisStore();
 
-const scheduler = new Scheduler(new RedisAdapter());
+const scheduler = new Scheduler({ adapter: store });
 scheduler.addJob(
     "myJob",
     () => {
@@ -53,7 +54,7 @@ The core package provides the essential functionality of the Job-Fire system.
 
 **Features**
 
--   `Scheduler`: A main scheduler class for managing jobs.
+-   `Scheduler`: The main scheduler class for managing jobs.
 -   `Job`: Represents a scheduled job with defined actions.
 
 ### Redis Adapter (`job-fire.redis`)
