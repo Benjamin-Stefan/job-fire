@@ -37,8 +37,8 @@ jobs:
             - name: Build packages
               run: npm run build
 
-            # - name: Version and Changelog Generation with Lerna
-            #   env:
-            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-            #   run: npx lerna publish from-package --throttle --yes --loglevel verbose
+            - name: Version and Changelog Generation with Lerna
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npx lerna publish from-package --throttle --yes --loglevel verbose
