@@ -56,6 +56,7 @@ export type JobExecutionStats = {
 export type JobOptions = {
     interval: number | null;
     cron?: string;
+    runOnStart?: boolean;
     retries?: number;
     params?: any;
     repeat?: boolean;
