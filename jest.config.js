@@ -5,6 +5,6 @@ module.exports = {
     transform: {
         "^.+\\.tsx?$": "ts-jest",
     },
-    projects: ["./packages/core", "./packages/adapter-mongo", "./packages/adapter-redis"],
+    projects: ["./packages/*"],
     transformIgnorePatterns: ["/node_modules/"],
 };
