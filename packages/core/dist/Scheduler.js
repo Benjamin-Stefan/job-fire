@@ -73,6 +73,9 @@ class Scheduler {
         else {
             throw new Error("Job must specify either an interval or a cron pattern.");
         }
+        if (options.runOnStart) {
+            this.enqueueJob(job);
+        }
         this.processQueue();
     }
     /**

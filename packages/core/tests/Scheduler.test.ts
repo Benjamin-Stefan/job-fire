@@ -84,6 +84,32 @@ describe("Scheduler", () => {
             expect(scheduler["runningJobs"].size).toBe(2);
         });
 
+        test("should process job direktly on start", async () => {
+            const jobFunction = jest.fn().mockImplementation(() => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 1000));
+            });
+            const jobOptions: JobOptions = { interval: 10000, runOnStart: true };
+
+            scheduler.addJob("job11", jobFunction, jobOptions);
+
+            await scheduler["processQueue"]();
+
+            expect(jobFunction).toHaveBeenCalled();
+        });
+
+        test("should process job not direktly on start", async () => {
+            const jobFunction = jest.fn().mockImplementation(() => {
+                return new Promise((resolve) => setTimeout(() => resolve({ success: true }), 1000));
+            });
+            const jobOptions: JobOptions = { interval: 10000, runOnStart: false };
+
+            scheduler.addJob("job12", jobFunction, jobOptions);
+
+            await scheduler["processQueue"]();
+
+            expect(jobFunction).not.toHaveBeenCalled();
+        });
+
         test("should execute job and log result", async () => {
             const jobFunction = jest.fn().mockResolvedValue({ success: true });
             const jobOptions: JobOptions = { interval: 1000 };
@@ -105,6 +131,21 @@ describe("Scheduler", () => {
             const jobHistory = await scheduler.getJobHistory("job23423423423427");
             expect(jobHistory).toBeUndefined();
         });
+
+        test("should retrieve job history", async () => {
+            const jobFunction = jest.fn().mockResolvedValue({ success: true });
+            const jobOptions: JobOptions = { interval: 1000 };
+
+            scheduler.addJob("job11", jobFunction, jobOptions);
+
+            const job = scheduler["intervalJobs"].get("job11");
+            if (job) {
+                await scheduler["executeJob"](job);
+            }
+
+            const jobHistory = await scheduler.getJobHistory("job11");
+            expect(jobHistory).toBeDefined();
+        });
     });
 
     describe("Timer and Cleanup Logic Tests", () => {
@@ -117,6 +158,16 @@ describe("Scheduler", () => {
 
             expect(scheduler["activeTimers"].length).toBe(0);
             expect(scheduler["jobTimers"].size).toBe(0);
+        });
+
+        test("should clear specific job timer", () => {
+            const jobFunction = jest.fn().mockResolvedValue({ success: true });
+            const jobOptions: JobOptions = { interval: 1000 };
+
+            scheduler.addJob("job12", jobFunction, jobOptions);
+            scheduler.removeJob("job12");
+
+            expect(scheduler["jobTimers"].has("job12")).toBe(false);
         });
     });
 

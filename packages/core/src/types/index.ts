@@ -50,6 +50,7 @@ export type JobExecutionStats = {
  * @typedef {object} JobOptions
  * @property {number | null} interval - Interval in milliseconds for repeated job execution, or null if not repeating.
  * @property {string} [cron] - Cron expression defining the job's schedule.
+ * @property {boolean} [runOnStart] - If true, executes the job immediately when the scheduler starts.
  * @property {number} [retries] - Number of retries allowed in case of job failure.
  * @property {any} [params] - Parameters to pass to the job function.
  * @property {boolean} [repeat] - Determines whether the job should repeat after completion.
