@@ -1,6 +1,6 @@
 {
     "name": "job-fire.mongo",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Mongo adapter for job-fire",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
@@ -22,7 +22,7 @@
     },
     "license": "MIT",
     "dependencies": {
-        "job-fire": "^0.2.1",
+        "job-fire": "^0.3.0",
         "mongodb": "^6.10.0"
     },
     "devDependencies": {
