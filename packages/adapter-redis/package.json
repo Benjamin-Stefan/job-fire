@@ -1,6 +1,6 @@
 {
     "name": "job-fire.redis",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Redis adapter for job-fire",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
@@ -24,7 +24,7 @@
     "license": "MIT",
     "dependencies": {
         "ioredis": "^5.4.1",
-        "job-fire": "^0.3.0"
+        "job-fire": "^0.3.1"
     },
     "devDependencies": {
         "@types/ioredis": "^4.28.10",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/Benjamin-Stefan/job-fire/compare/job-fire@0.3.0...job-fire@0.3.1) (2024-11-16)
+
+
+### Bug Fixes
+
+* resolve export issue in index.js ([ce43b49](https://github.com/Benjamin-Stefan/job-fire/commit/ce43b49732aa4841dc394d6e2aa9c6a83d1d947b))
+
+
+
+
+
 # [0.3.0](https://github.com/Benjamin-Stefan/job-fire/compare/job-fire@0.2.1...job-fire@0.3.0) (2024-11-16)
 
 
